@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobilefirebasetest.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/spender_small"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/spender_small"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/spender_big"
+        android:orderInCategory="100"
+        android:title="@string/spender_big"
         app:showAsAction="never" />
 </menu>

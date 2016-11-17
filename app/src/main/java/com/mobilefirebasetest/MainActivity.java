@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
     Bundle bundle;
+    Bundle appOpenBundle;
+    private String spenderType = "small";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
         String name = "sean name";
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
-//        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+
+        appOpenBundle = new Bundle();
+        appOpenBundle.putString(FirebaseAnalytics.Param.ORIGIN, "firebase test app open");
 
 
-        final String spenderType = "small";
         final String genderType = "male";
         final String ageVal = "30";
 
-        mFirebaseAnalytics.setUserProperty("Gender", genderType);
+
         mFirebaseAnalytics.setUserProperty("Age", ageVal);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
 
                 mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, MainActivity.this.bundle);
-                mFirebaseAnalytics.setUserProperty("spender", spenderType);
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, MainActivity.this.appOpenBundle);
+                mFirebaseAnalytics.setUserProperty("Gender", genderType);
+
             }
         });
     }
@@ -67,8 +72,16 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.spender_small) {
+            MainActivity.this.spenderType = "small";
+            mFirebaseAnalytics.setUserProperty("spender", spenderType);
+            return true;
+        }
+        if (id == R.id.spender_big) {
+            this.spenderType = "big";
+            mFirebaseAnalytics.setUserProperty("spender", spenderType);
             return true;
         }
 
