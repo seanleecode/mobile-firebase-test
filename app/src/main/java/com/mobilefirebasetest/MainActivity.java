@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         appOpenBundle.putString(FirebaseAnalytics.Param.ORIGIN, "firebase test app open");
 
 
-        final String genderType = "male";
+        final String genderType = "female";
         final String ageVal = "30";
 
 
